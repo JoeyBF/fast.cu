@@ -32,6 +32,7 @@ void cudaCheck(cudaError_t error, const char *file, int line) {
 #include "examples/matmul/matmul_3.cuh"
 #include "examples/matmul/matmul_4.cuh"
 #include "examples/matmul/matmul_5.cuh"
+#include "examples/matmul/matmul_5b.cuh"
 #include "examples/matmul/matmul_6.cuh"
 #include "examples/matmul/matmul_7.cuh"
 #include "examples/matmul/matmul_8.cuh"
@@ -94,6 +95,9 @@ void run_kernel(int kernel_num, int M, int N, int K, bf16 *A, bf16 *B, bf16 *C, 
       break;
     case 12:
       runKernel12(M, N, K, A, B, C, DB);
+      break;
+    case 55:
+      runKernel5b(M, N, K, A, B, C, DB);
       break;
   }
 }
@@ -169,7 +173,7 @@ int main() {
 
   int repeat_times = 8;
   bool run_verif = true;
-  for (int kernel_num : {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}) {
+  for (int kernel_num : {0, 1, 2, 3, 4, 5, 55, 6, 7, 8, 9, 10, 11, 12}) {
     // for (int kernel_num : {0, 11}) {
     // Give the GPU some rest to avoid thermal throttling
     sleep(5);
